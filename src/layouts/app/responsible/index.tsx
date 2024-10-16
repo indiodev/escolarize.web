@@ -2,7 +2,7 @@ import { Sidebar } from "@/components/sidebar";
 import { Button } from "@/components/ui/button";
 import { ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { cn } from "@/lib/utils";
-import { ChevronsLeft, ChevronsRight, LogOut } from "lucide-react";
+import { ChevronsLeft, ChevronsRight, HandCoins, LogOut } from "lucide-react";
 import React from "react";
 import { Outlet } from "react-router-dom";
 // import { Icon } from '@components/icons';
@@ -23,17 +23,27 @@ export function Responsible(): React.ReactElement {
       <section className="flex-1 flex flex-row h-screen bg-app-neutral-12 overflow-hidden">
         <ResizablePanelGroup direction="horizontal">
           <ResizablePanel
-            className={cn(!open && "max-w-20", open && "max-w-56", "shadow-md")}
+            className={cn(
+              !open && "max-w-20",
+              open && "max-w-56",
+              "shadow-lg relative"
+            )}
           >
             <Sidebar.Header>
-              <Button
-                onClick={() => setOpen((state) => !state)}
-                className="absolute right-0 top-2 w-7 h-7 p-0 rounded-tl-full rounded-bl-full bg-indigo-500 hover:bg-indigo-600"
-              >
+              {open && (
+                <Button
+                  onClick={() => setOpen((state) => !state)}
+                  className="absolute right-0 top-2 w-7 h-7 p-0 rounded-tl-full rounded-bl-full bg-indigo-500 hover:bg-indigo-600 shadow-2xl"
+                >
+                  <ChevronsLeft className="w-4 h-4" />
+                </Button>
+              )}
+
+              {/* <Button>
                 {!open && <ChevronsRight className="w-4 h-4" />}
 
                 {open && <ChevronsLeft className="w-4 h-4" />}
-              </Button>
+              </Button> */}
               {open && (
                 <h1 className="text-indigo-600 uppercase font-semibold text-3xl">
                   JEDAIS TEC
@@ -48,43 +58,23 @@ export function Responsible(): React.ReactElement {
             </Sidebar.Header>
 
             <Sidebar.Menu>
-              {/* {ROUTER.COMPANY.map((route) => {
-              if (route.type === "button") {
-                const isAddEmployeesButton =
-                  route.label === "Adicionar Funcionários";
+              <Sidebar.Link
+                to="/app/responsible/payments"
+                isActive={location.pathname === "/app/responsible/payments"}
+                className="w-full rounded-none p-5 space-x-2 inline-flex justify-center items-center"
+              >
+                <HandCoins className={cn("w-5 h-5", !open && "w-6 h-6")} />
 
-                return (
-                  <Sidebar.Button
-                    key={route.path}
-                    {...(isAddEmployeesButton && {
-                      onClick: () =>
-                        companyRegisterEmployeesButtonRef.current?.click(),
-                    })}
-                  >
-                    <route.icon />
-                    <span className="text-app-neutral-03 ml-2 font-normal text-xs lg:text-base">
-                      {route.label}
-                    </span>
-                  </Sidebar.Button>
-                );
-              }
-
-              return (
-                <Sidebar.Link
-                  key={route.path}
-                  to={route.path}
-                  isActive={location.pathname === route.path}
-                >
-                  <route.icon />
-                  <span className="text-app-neutral-03 font-normal text-base">
-                    {route.label}
+                {open && (
+                  <span className="text-app-neutral-03 font-semibold uppercase text-base">
+                    Mensalidades
                   </span>
-                </Sidebar.Link>
-              );
-            })} */}
-
+                )}
+              </Sidebar.Link>
+            </Sidebar.Menu>
+            <Sidebar.Footer>
               <Sidebar.Button
-                className="w-full rounded-none p-5 bg-indigo-500 space-x-2"
+                className="w-full rounded-none px-5 py-7 border border-indigo-600 space-x-2 shadow-none bg-indigo-50 text-indigo-500 hover:bg-indigo-50"
                 // onClick={() => signOutButtonRef.current?.click()}
               >
                 {/* <Icon.SignOut /> */}
@@ -96,10 +86,18 @@ export function Responsible(): React.ReactElement {
                   </span>
                 )}
               </Sidebar.Button>
-            </Sidebar.Menu>
+            </Sidebar.Footer>
           </ResizablePanel>
 
-          <ResizablePanel>
+          <ResizablePanel className="relative">
+            {!open && (
+              <Button
+                onClick={() => setOpen((state) => !state)}
+                className="absolute left-0 z-50 top-2 w-7 h-7 p-0 rounded-tr-full rounded-br-full bg-indigo-500 hover:bg-indigo-600 shadow-2xl"
+              >
+                <ChevronsRight className="w-4 h-4" />
+              </Button>
+            )}
             <React.Suspense
               fallback={
                 // <Loading className="flex-1 flex justify-center items-center h-screen [&>svg]:w-44" />

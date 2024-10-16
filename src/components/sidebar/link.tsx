@@ -10,8 +10,12 @@ export const Link = React.forwardRef<
 >(({ className, isActive, ...props }, ref) => {
   console.log({ isActive });
   return (
-    <li className="flex-1 w-full cursor-pointer flex">
-      <NavLink className={cn(className)} ref={ref} {...props} />
+    <li className="flex-1 w-full cursor-pointer flex px-0">
+      <NavLink
+        className={cn(className, isActive && "bg-indigo-500 [&>*]:text-white")}
+        ref={ref}
+        {...props}
+      />
     </li>
   );
 });
