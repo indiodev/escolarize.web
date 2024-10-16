@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/table";
 interface Props {
   labels: string[];
-  data: { date: string; status: string; id: number }[];
+  data: { course: string; date: string; status: string; id: number }[];
 }
 export function Table({ data, labels }: Props): React.ReactElement {
   return (
@@ -24,9 +24,9 @@ export function Table({ data, labels }: Props): React.ReactElement {
       <TableBody>
         {data.map((row) => (
           <TableRow key={row.id}>
+            <TableCell>{row.course}</TableCell>
             <TableCell>{row.date}</TableCell>
             <TableCell>R$ 150,00</TableCell>
-
             <TableCell>{row.status}</TableCell>
           </TableRow>
         ))}

@@ -106,7 +106,7 @@ export function Responsible(): React.ReactElement {
                 <div></div>
               }
             >
-              <section className="flex-1 w-full h-auto p-12 overflow-y-auto">
+              <section className="flex-1 w-full  h-auto p-12 overflow-y-auto flex justify-center">
                 <Outlet />
               </section>
             </React.Suspense>
