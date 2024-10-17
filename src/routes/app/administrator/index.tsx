@@ -10,9 +10,9 @@ const AdministratorPaymentPage = React.lazy(async function () {
 });
 
 const AdministratorResponsiblePage = React.lazy(async function () {
-  const module = await import("@/pages/app/administrator/payment");
+  const module = await import("@/pages/app/administrator/responsible");
   return {
-    default: module.Payment,
+    default: module.Responsible,
   };
 });
 

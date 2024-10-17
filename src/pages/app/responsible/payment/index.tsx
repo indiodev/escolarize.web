@@ -13,14 +13,12 @@ import { Table } from "./table";
 export function Payment(): React.ReactElement {
   return (
     <main className="container space-y-5">
-      <h2 className="text-2xl text-indigo-500 font-semibold">
-        Mensalidades/Pagamentos
-      </h2>
+      <h2 className="text-2xl  font-semibold">Mensalidades/Pagamentos</h2>
 
       <section className="inline-flex items-center space-x-10 w-full">
         <div className="flex-1 inline-flex space-x-2 w-full">
           <Input placeholder="Pesquisar" />
-          <Button className="p-2 bg-indigo-500 hover:bg-indigo-600">
+          <Button className="p-2 ">
             <Search className="w-4 h-4" />
           </Button>
         </div>

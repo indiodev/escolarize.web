@@ -11,9 +11,9 @@ export const Link = React.forwardRef<
     <li className="flex-1 w-full cursor-pointer flex px-0">
       <NavLink
         className={cn(
-          isActive && "bg-indigo-500 [&>*]:text-white",
+          isActive && "bg-neutral-500 [&>*]:text-white",
           !isActive &&
-            "bg-indigo-50 border border-indigo-100 [&>*]:text-indigo-500",
+            "bg-indigo-50 border border-indigo-100 [&>*]:text-neutral-500",
           className
         )}
         ref={ref}
