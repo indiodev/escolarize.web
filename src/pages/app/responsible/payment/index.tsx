@@ -58,7 +58,7 @@ export function Payment(): React.ReactElement {
             course: "Curso Informática Básica",
           },
         ]}
-        labels={["Referência", "Vencimento", "Valor", "Situação", ""]}
+        labels={["Referência", "Vencimento", "Valor", "Situação"]}
       />
     </main>
   );
