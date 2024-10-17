@@ -10,7 +10,7 @@ import {
 import { Search } from "lucide-react";
 import { Table } from "./table";
 
-export function Payment(): React.ReactElement {
+export function Responsible(): React.ReactElement {
   return (
     <main className="container space-y-5">
       <h2 className="text-2xl text-indigo-500 font-semibold">

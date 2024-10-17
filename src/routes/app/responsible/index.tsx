@@ -13,7 +13,7 @@ export function Router(): React.ReactElement {
   return (
     <Routes>
       <Route path="/" element={<Layout.App.Responsible />}>
-        <Route path="/payments" element={<ResponsiblePaymentPage />} />
+        <Route path="/payment" element={<ResponsiblePaymentPage />} />
       </Route>
     </Routes>
   );

@@ -9,7 +9,14 @@ export const Button = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <li className="flex-1 w-full cursor-pointer flex px-0">
-      <BaseButton className={cn(className)} ref={ref} {...props} />
+      <BaseButton
+        className={cn(
+          "bg-indigo-50 border border-indigo-100 [&>*]:text-red-500 w-full shadow-none rounded-none py-7 space-x-3 hover:bg-indigo-200/50",
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
     </li>
   );
 });

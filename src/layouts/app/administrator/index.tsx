@@ -2,9 +2,15 @@ import { Sidebar } from "@/components/sidebar";
 import { Button } from "@/components/ui/button";
 import { ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { cn } from "@/lib/utils";
-import { ChevronsLeft, ChevronsRight, HandCoins, LogOut } from "lucide-react";
+import {
+  ChevronsLeft,
+  ChevronsRight,
+  HandCoins,
+  LogOut,
+  Users,
+} from "lucide-react";
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 // import { Icon } from '@components/icons';
 // import { Loading } from '@components/loading';
 // import { Logo } from '@components/logo';
@@ -14,8 +20,8 @@ import { Outlet } from "react-router-dom";
 
 // import { Modal } from './modal';
 
-export function Responsible(): React.ReactElement {
-  // const location = useLocation();
+export function Administrator(): React.ReactElement {
+  const location = useLocation();
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -59,8 +65,23 @@ export function Responsible(): React.ReactElement {
 
             <Sidebar.Menu>
               <Sidebar.Link
-                to="/app/responsible/payment"
-                isActive={location.pathname === "/app/responsible/payment"}
+                to="/app/administrator/responsible"
+                isActive={
+                  location.pathname === "/app/administrator/responsible"
+                }
+                className="w-full rounded-none p-5 space-x-2 inline-flex justify-center items-center"
+              >
+                <Users className={cn("w-5 h-5", !open && "w-6 h-6")} />
+
+                {open && (
+                  <span className="text-app-neutral-03 font-semibold uppercase text-base">
+                    Responsáveis
+                  </span>
+                )}
+              </Sidebar.Link>
+              <Sidebar.Link
+                to="/app/administrator/payment"
+                isActive={location.pathname === "/app/administrator/payment"}
                 className="w-full rounded-none p-5 space-x-2 inline-flex justify-center items-center"
               >
                 <HandCoins className={cn("w-5 h-5", !open && "w-6 h-6")} />
