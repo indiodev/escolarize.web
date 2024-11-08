@@ -43,9 +43,12 @@ export function Router(): React.ReactElement {
       navigate(pathnameWithQuery);
       return;
     }
+
     if (!auth.token && !pathnameWithQuery.includes("auth")) {
       auth.clear();
-      navigate("/");
+      // navigate("/");
+      navigate("/auth/sign-in/administrator");
+
       return;
     }
   }, []);
