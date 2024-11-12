@@ -9,23 +9,88 @@ import {
 } from "@/components/ui/select";
 import { Search } from "lucide-react";
 import { Table } from "./table";
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { useAdminListPaymentsQuery } from "@/query/admin/list-payments-paginate.query";
+import { useSearchParams } from "react-router-dom";
+import React from "react";
 
 export function Payment(): React.ReactElement {
+  const [params, setParams] = useSearchParams(
+		new URLSearchParams(location.search),
+	);
+  const SearchInputRef = React.useRef<HTMLInputElement>(null);
+
+  const { data: payments_list, status: payments_status } = 
+    useAdminListPaymentsQuery({
+      page: Number(params.get('page') || 1),
+      per_page: Number(params.get('per_page') || 10),
+      ...(params.get('search') && { search: params.get('search')! }),
+  });
+
+  console.log(payments_list);
+  console.log(payments_status);
+
   return (
     <main className="container space-y-5">
       <h2 className="text-2xl font-semibold">Mensalidades/Pagamentos</h2>
 
       <section className="inline-flex items-center space-x-10 w-full">
         <div className="flex-1 inline-flex space-x-2 w-full">
-          <Input placeholder="Pesquisar" />
-          <Button className="p-2 ">
+          <Input 
+            placeholder="Pesquisar"
+            onChange={(event) => {
+              if (!event.currentTarget.value) {
+                setParams(params);
+                setParams((state) => {
+                  state.delete('search');
+                  return state;
+                })
+                return;
+              }
+            }}
+            onKeyUp={(event) => {
+              if (event.key === 'Enter') {
+                if (!SearchInputRef.current?.value) return;
+                const search = SearchInputRef.current?.value;
+                setParams((state) => {
+                  state.set('page', '1');
+                  state.set('search', search);
+                  return state;
+                })
+              }
+            }}
+            ref={SearchInputRef}
+          />
+          <Button 
+            className="p-2"
+            onClick={() => {
+              if (!SearchInputRef.current?.value) return;
+              const search = SearchInputRef.current?.value;
+              setParams((state) => {
+                state.set('page', '1');
+                state.set('search', search);
+                return state;
+              })
+            }}
+          >
             <Search className="w-4 h-4" />
           </Button>
         </div>
 
+        
         <div className="inline-flex items-center space-x-4">
           <span className="font-medium">Itens por página </span>
-          <Select defaultValue="10">
+          <Select 
+            defaultValue={
+              params.get('per_page') || '10'
+            }
+            onValueChange={(value) => {
+              setParams((state) => {
+                state.set('per_page', value);
+                return state;
+              })
+            }}
+          >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="" />
             </SelectTrigger>
@@ -40,29 +105,59 @@ export function Payment(): React.ReactElement {
         </div>
       </section>
 
-      <Table
-        data={[
-          {
-            id: 1,
-            date: "09/10/2024",
-            status: "Paga",
-            course: "Curso Informática Básica",
-          },
-          {
-            id: 2,
-            date: "09/11/2024",
-            status: "Pendente",
-            course: "Curso Informática Básica",
-          },
-          {
-            id: 3,
-            date: "09/12/2024",
-            status: "Pendente",
-            course: "Curso Informática Básica",
-          },
-        ]}
-        labels={["Referência", "Vencimento", "Valor", "Situação"]}
-      />
+      <div className="flex flex-col gap-4">
+        <Table
+          data={[
+            {
+              id: 1,
+              date: "09/10/2024",
+              status: "Paga",
+              course: "Curso Informática Básica",
+              cpf: "123.456.789-00",
+              email: "joao@email.com",
+              phone: "(11) 99999-9999",
+              nome: "João da Silva",
+            },
+            {
+              id: 2,
+              date: "09/11/2024",
+              status: "Pendente",
+              course: "Curso Informática Básica",
+              cpf: "123.456.789-00",
+              email: "joao@email.com",
+              phone: "(11) 99999-9999",
+              nome: "João da Silva",
+            },
+            {
+              id: 3,
+              date: "09/12/2024",
+              status: "Pendente",
+              course: "Curso Informática Básica",
+              cpf: "123.456.789-22",
+              email: "joao@email.com",
+              phone: "(11) 99999-9999",
+              nome: "João da Silva",
+            },
+          ]}
+          labels={["Nome", "Email", "Telefone", "CPF","Referência", "Vencimento", "Valor", "Situação"]}
+        />
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious href="#" />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#">1</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationEllipsis />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationNext href="#" />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      </div>
     </main>
   );
 }
