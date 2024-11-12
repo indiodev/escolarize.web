@@ -9,12 +9,13 @@ import {
 } from "@/components/ui/select";
 import { Search } from "lucide-react";
 import { Table } from "./table";
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { useAdminListPaymentsQuery } from "@/query/admin/list-payments-paginate.query";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import React from "react";
+import { Pagination } from "./pagination";
 
 export function Payment(): React.ReactElement {
+  const location = useLocation()
   const [params, setParams] = useSearchParams(
 		new URLSearchParams(location.search),
 	);
@@ -30,6 +31,18 @@ export function Payment(): React.ReactElement {
   console.log(payments_list);
   console.log(payments_status);
 
+  const meta = {
+    total: 3,             
+    perPage: 1,            
+    currentPage: 1,      
+    lastPage: 3, 
+    firstPage: 1,
+    firstPageUrl: "/page/1",
+    lastPageUrl: "/page/3",
+    nextPageUrl: "/page/2",
+    previousPageUrl: null
+};
+
   return (
     <main className="container space-y-5">
       <h2 className="text-2xl font-semibold">Mensalidades/Pagamentos</h2>
@@ -40,7 +53,6 @@ export function Payment(): React.ReactElement {
             placeholder="Pesquisar"
             onChange={(event) => {
               if (!event.currentTarget.value) {
-                setParams(params);
                 setParams((state) => {
                   state.delete('search');
                   return state;
@@ -141,22 +153,7 @@ export function Payment(): React.ReactElement {
           ]}
           labels={["Nome", "Email", "Telefone", "CPF","Referência", "Vencimento", "Valor", "Situação"]}
         />
-        <Pagination>
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious href="#" />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">1</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationNext href="#" />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
+        <Pagination meta={meta} />
       </div>
     </main>
   );
