@@ -1,7 +1,7 @@
-export interface MetaQuery<S = string> {
+export interface MetaQuery {
 	page?: number;
 	per_page?: number;
-	search?: S;   // Campo de busca genérico
+	search?: string;
 }
 
 export type MetaResponse<T> = {
