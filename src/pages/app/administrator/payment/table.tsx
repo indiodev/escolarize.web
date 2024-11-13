@@ -17,8 +17,19 @@ import {
 import { Download, Ellipsis, Send } from "lucide-react";
 interface Props {
   labels: string[];
-  data: { course: string; date: string; status: string; id: number }[];
+  data: TableProps[];
 }
+interface TableProps {
+  course: string;
+  date: string;
+  status: string;
+  id: number;
+  cpf: string;
+  email: string;
+  phone: string;
+  nome: string;
+}
+
 export function Table({ data, labels }: Props): React.ReactElement {
   return (
     <Root>
@@ -34,6 +45,10 @@ export function Table({ data, labels }: Props): React.ReactElement {
       <TableBody>
         {data.map((row) => (
           <TableRow key={row.id}>
+            <TableCell>{row.nome}</TableCell>
+            <TableCell>{row.email}</TableCell>
+            <TableCell>{row.phone}</TableCell>
+            <TableCell>{row.cpf}</TableCell>
             <TableCell>{row.course}</TableCell>
             <TableCell>{row.date}</TableCell>
             <TableCell>R$ 150,00</TableCell>
