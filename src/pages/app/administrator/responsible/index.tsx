@@ -8,30 +8,30 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Search } from "lucide-react";
-import { Table } from "./table";
-import { Pagination } from "./pagination";
-import { useLocation, useSearchParams } from "react-router-dom";
 import React from "react";
+import { useLocation, useSearchParams } from "react-router-dom";
+import { Pagination } from "./pagination";
+import { Table } from "./table";
 
 export function Responsible(): React.ReactElement {
-  const location = useLocation()
+  const location = useLocation();
   const [params, setParams] = useSearchParams(
-		new URLSearchParams(location.search),
-	);
+    new URLSearchParams(location.search)
+  );
 
   const SearchInputRef = React.useRef<HTMLInputElement>(null);
 
   const meta = {
-    total: 3,             
-    perPage: 1,            
-    currentPage: 1,      
-    lastPage: 3, 
+    total: 3,
+    perPage: 1,
+    currentPage: 1,
+    lastPage: 3,
     firstPage: 1,
     firstPageUrl: "/page/1",
     lastPageUrl: "/page/3",
     nextPageUrl: "/page/2",
-    previousPageUrl: null
-};
+    previousPageUrl: null,
+  };
 
   return (
     <main className="container space-y-5">
@@ -39,40 +39,40 @@ export function Responsible(): React.ReactElement {
 
       <section className="inline-flex items-center space-x-10 w-full">
         <div className="flex-1 inline-flex space-x-2 w-full">
-        <Input 
+          <Input
             placeholder="Pesquisar"
             onChange={(event) => {
               if (!event.currentTarget.value) {
                 setParams((state) => {
-                  state.delete('search');
+                  state.delete("search");
                   return state;
-                })
+                });
                 return;
               }
             }}
             onKeyUp={(event) => {
-              if (event.key === 'Enter') {
+              if (event.key === "Enter") {
                 if (!SearchInputRef.current?.value) return;
                 const search = SearchInputRef.current?.value;
                 setParams((state) => {
-                  state.set('page', '1');
-                  state.set('search', search);
+                  state.set("page", "1");
+                  state.set("search", search);
                   return state;
-                })
+                });
               }
             }}
             ref={SearchInputRef}
           />
-          <Button 
+          <Button
             className="p-2"
             onClick={() => {
               if (!SearchInputRef.current?.value) return;
               const search = SearchInputRef.current?.value;
               setParams((state) => {
-                state.set('page', '1');
-                state.set('search', search);
+                state.set("page", "1");
+                state.set("search", search);
                 return state;
-              })
+              });
             }}
           >
             <Search className="w-4 h-4" />
@@ -81,15 +81,13 @@ export function Responsible(): React.ReactElement {
 
         <div className="inline-flex items-center space-x-4">
           <span className="font-medium">Itens por página </span>
-          <Select 
-            defaultValue={
-              params.get('per_page') || '10'
-            }
+          <Select
+            defaultValue={params.get("per_page") || "10"}
             onValueChange={(value) => {
               setParams((state) => {
-                state.set('per_page', value);
+                state.set("per_page", value);
                 return state;
-              })
+              });
             }}
           >
             <SelectTrigger className="w-[180px]">
@@ -105,7 +103,6 @@ export function Responsible(): React.ReactElement {
           </Select>
         </div>
       </section>
-
 
       <div className="flex flex-col gap-4">
         <Table

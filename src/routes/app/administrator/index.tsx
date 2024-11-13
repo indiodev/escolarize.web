@@ -16,23 +16,6 @@ const AdministratorResponsiblePage = React.lazy(async function () {
   };
 });
 
-// export const Router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <Layout.App.Administrator />,
-//     children: [
-//       {
-//         path: "/responsible",
-//         element: <AdministratorResponsiblePage />,
-//       },
-//       {
-//         path: "/payment",
-//         element: <AdministratorPaymentPage />,
-//       },
-//     ],
-//   },
-// ]);
-
 export function Router(): React.ReactElement {
   return (
     <Routes>

@@ -1,32 +1,33 @@
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from "react-router-dom";
 
+import { Button } from "@/components/ui/button";
 import {
-	PaginationContent,
-	PaginationItem,
-	Pagination as Root,
-} from '@/components/ui/pagination';
-import { MetaData } from '@/models/query.model';
-import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
+  PaginationContent,
+  PaginationItem,
+  Pagination as Root,
+} from "@/components/ui/pagination";
+import { MetaData } from "@/models/query.model";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "lucide-react";
 
-export function Pagination({
-	meta,
-}: {
-	meta: MetaData;
-}): React.ReactElement {
-	const [, setParams] = useSearchParams(new URLSearchParams(location.search));
+export function Pagination({ meta }: { meta: MetaData }): React.ReactElement {
+  const [, setParams] = useSearchParams(new URLSearchParams(location.search));
 
-	const handlePageChange = (page: number): void => {
-		setParams((state) => {
-			state.set('page', page.toString());
-			return state;
-		});
-	};
+  const handlePageChange = (page: number): void => {
+    setParams((state) => {
+      state.set("page", page.toString());
+      return state;
+    });
+  };
 
-  console.log(meta, handlePageChange)
+  console.log(meta, handlePageChange);
 
-	return (
-    <Root className='flex justify-end'>
+  return (
+    <Root className="flex justify-end">
       <PaginationContent>
         <PaginationItem>
           <Button>
@@ -50,5 +51,5 @@ export function Pagination({
         </PaginationItem>
       </PaginationContent>
     </Root>
-	);
+  );
 }

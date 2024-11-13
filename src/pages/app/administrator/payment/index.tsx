@@ -7,41 +7,41 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Search } from "lucide-react";
-import { Table } from "./table";
 import { useAdminListPaymentsQuery } from "@/query/admin/list-payments-paginate.query";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { Search } from "lucide-react";
 import React from "react";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { Pagination } from "./pagination";
+import { Table } from "./table";
 
 export function Payment(): React.ReactElement {
-  const location = useLocation()
+  const location = useLocation();
   const [params, setParams] = useSearchParams(
-		new URLSearchParams(location.search),
-	);
+    new URLSearchParams(location.search)
+  );
   const SearchInputRef = React.useRef<HTMLInputElement>(null);
 
-  const { data: payments_list, status: payments_status } = 
+  const { data: payments_list, status: payments_status } =
     useAdminListPaymentsQuery({
-      page: Number(params.get('page') || 1),
-      per_page: Number(params.get('per_page') || 10),
-      ...(params.get('search') && { search: params.get('search')! }),
-  });
+      page: Number(params.get("page") || 1),
+      per_page: Number(params.get("per_page") || 10),
+      ...(params.get("search") && { search: params.get("search")! }),
+    });
 
   console.log(payments_list);
   console.log(payments_status);
 
   const meta = {
-    total: 3,             
-    perPage: 1,            
-    currentPage: 1,      
-    lastPage: 3, 
+    total: 3,
+    perPage: 1,
+    currentPage: 1,
+    lastPage: 3,
     firstPage: 1,
     firstPageUrl: "/page/1",
     lastPageUrl: "/page/3",
     nextPageUrl: "/page/2",
-    previousPageUrl: null
-};
+    previousPageUrl: null,
+  };
 
   return (
     <main className="container space-y-5">
@@ -49,58 +49,55 @@ export function Payment(): React.ReactElement {
 
       <section className="inline-flex items-center space-x-10 w-full">
         <div className="flex-1 inline-flex space-x-2 w-full">
-          <Input 
+          <Input
             placeholder="Pesquisar"
             onChange={(event) => {
               if (!event.currentTarget.value) {
                 setParams((state) => {
-                  state.delete('search');
+                  state.delete("search");
                   return state;
-                })
+                });
                 return;
               }
             }}
             onKeyUp={(event) => {
-              if (event.key === 'Enter') {
+              if (event.key === "Enter") {
                 if (!SearchInputRef.current?.value) return;
                 const search = SearchInputRef.current?.value;
                 setParams((state) => {
-                  state.set('page', '1');
-                  state.set('search', search);
+                  state.set("page", "1");
+                  state.set("search", search);
                   return state;
-                })
+                });
               }
             }}
             ref={SearchInputRef}
           />
-          <Button 
+          <Button
             className="p-2"
             onClick={() => {
               if (!SearchInputRef.current?.value) return;
               const search = SearchInputRef.current?.value;
               setParams((state) => {
-                state.set('page', '1');
-                state.set('search', search);
+                state.set("page", "1");
+                state.set("search", search);
                 return state;
-              })
+              });
             }}
           >
             <Search className="w-4 h-4" />
           </Button>
         </div>
 
-        
         <div className="inline-flex items-center space-x-4">
           <span className="font-medium">Itens por página </span>
-          <Select 
-            defaultValue={
-              params.get('per_page') || '10'
-            }
+          <Select
+            defaultValue={params.get("per_page") || "10"}
             onValueChange={(value) => {
               setParams((state) => {
-                state.set('per_page', value);
+                state.set("per_page", value);
                 return state;
-              })
+              });
             }}
           >
             <SelectTrigger className="w-[180px]">
@@ -151,7 +148,16 @@ export function Payment(): React.ReactElement {
               nome: "João da Silva",
             },
           ]}
-          labels={["Nome", "Email", "Telefone", "CPF","Referência", "Vencimento", "Valor", "Situação"]}
+          labels={[
+            "Nome",
+            "Email",
+            "Telefone",
+            "CPF",
+            "Referência",
+            "Vencimento",
+            "Valor",
+            "Situação",
+          ]}
         />
         <Pagination meta={meta} />
       </div>
