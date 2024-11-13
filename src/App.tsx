@@ -5,12 +5,12 @@ import { BrowserRouter } from "react-router-dom";
 // import { Toaster } from "@components/ui/toaster";
 // import { tanstack } from "@libs/tanstack";
 
-import { tanstack } from "./lib/tanstack";
+import { TANS_TACK_QUERY_CLIENT } from "./lib/tans-tack-query-client";
 import { Router } from "./routes";
 
 export function App(): React.ReactElement {
   return (
-    <QueryClientProvider client={tanstack}>
+    <QueryClientProvider client={TANS_TACK_QUERY_CLIENT}>
       <BrowserRouter>
         <Router />
       </BrowserRouter>
