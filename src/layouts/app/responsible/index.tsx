@@ -5,7 +5,7 @@ import { ChevronsRight } from "lucide-react";
 import React from "react";
 import { Outlet } from "react-router-dom";
 
-export function Administrator(): React.ReactElement {
+export function Responsible(): React.ReactElement {
   const { toggleSidebar, isMobile } = useSidebar();
 
   return (
