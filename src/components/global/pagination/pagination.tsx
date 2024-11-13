@@ -17,12 +17,12 @@ import {
 export function Pagination({ meta }: { meta: MetaData }): React.ReactElement {
   const [, setParams] = useSearchParams(new URLSearchParams(location.search));
 
-  const handlePageChange = (page: number): void => {
+  function handlePageChange(page: number): void {
     setParams((state) => {
       state.set("page", page.toString());
       return state;
     });
-  };
+  }
 
   console.log(meta, handlePageChange);
 
@@ -30,22 +30,48 @@ export function Pagination({ meta }: { meta: MetaData }): React.ReactElement {
     <Root className="flex justify-end">
       <PaginationContent>
         <PaginationItem>
-          <Button>
+          <Button
+            onClick={() => handlePageChange(1)}
+            variant="ghost"
+            size="icon"
+            className="border"
+          >
             <ChevronsLeft />
           </Button>
         </PaginationItem>
         <PaginationItem>
-          <Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="border"
+            onClick={() => {
+              if (meta?.currentPage > 1)
+                handlePageChange(meta?.currentPage - 1);
+            }}
+          >
             <ChevronLeft />
           </Button>
         </PaginationItem>
         <PaginationItem>
-          <Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="border"
+            onClick={() => {
+              if (meta?.currentPage <= meta?.lastPage)
+                handlePageChange(meta?.currentPage + 1);
+            }}
+          >
             <ChevronRight />
           </Button>
         </PaginationItem>
         <PaginationItem>
-          <Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="border"
+            onClick={() => handlePageChange(meta?.lastPage)}
+          >
             <ChevronsRight />
           </Button>
         </PaginationItem>
