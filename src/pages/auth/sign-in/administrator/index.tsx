@@ -40,7 +40,7 @@ export function Administrator(): React.ReactElement {
         access: "ADMINISTRATOR",
         expiresAt: data.expires_at,
       });
-      navigate("/app/administrator/payment");
+      navigate("/app/administrator/dashboard");
 
       toast({
         title: "Login realizado",
