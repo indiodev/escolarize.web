@@ -28,7 +28,7 @@ export function Administrator(): React.ReactElement {
             </section>
           )}
 
-          <section className="flex h-full flex-1 flex-col gap-4 w-full overflow-y-auto">
+          <section className="flex h-full flex-1 flex-col gap-4 w-full overflow-y-auto p-4">
             <Outlet />
           </section>
         </main>

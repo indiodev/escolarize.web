@@ -23,7 +23,7 @@ export function Responsible(): React.ReactElement {
   };
 
   return (
-    <main className="container space-y-5">
+    <main className="container space-y-5 max-w-full w-full">
       <h2 className="text-2xl font-semibold">Responsáveis</h2>
 
       <section className="inline-flex items-center space-x-10 w-full">
