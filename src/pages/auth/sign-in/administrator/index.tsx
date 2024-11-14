@@ -175,7 +175,7 @@ export function Administrator(): React.ReactElement {
                 name="remember_me"
                 render={({ field }) => (
                   <div className="flex justify-between p-2 gap-6">
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md">
+                    <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md">
                       <FormControl>
                         <Checkbox
                           checked={field.value}
@@ -190,7 +190,7 @@ export function Administrator(): React.ReactElement {
                     </FormItem>
 
                     <NavLink
-                      to="/auth/forgot-password/admin"
+                      to="/auth/forgot-password"
                       className="text-base font-semibold hover:underline"
                     >
                       Esqueceu sua senha?
