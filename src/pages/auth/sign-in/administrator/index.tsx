@@ -78,7 +78,7 @@ export function Administrator(): React.ReactElement {
 
   return (
     <section className="w-auto flex flex-col items-center">
-      <h1 className="text-3xl font-bold">School Manager</h1>
+      <h1 className="text-3xl font-bold">Escolarize</h1>
       <div className="py-5 flex flex-col gap-5 w-[32rem]">
         <h2 className="md:text-[1.25rem] lg:text-[1.4rem] text-lg text-left font-medium">
           Acesse sua conta

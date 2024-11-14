@@ -28,12 +28,12 @@ export function Router(): React.ReactElement {
     if (auth.token) {
       if (pathnameWithQuery === "/") {
         if (auth.access === "ADMINISTRATOR") {
-          navigate("/app/administrator/payment");
+          navigate("/app/administrator/dashboard");
           return;
         }
 
         if (auth.access === "RESPONSIBLE") {
-          navigate("/app/responsible/payment");
+          navigate("/app/responsible/dashboard");
           return;
         }
 
