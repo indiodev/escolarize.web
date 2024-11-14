@@ -1,6 +1,6 @@
 import { Responsible } from "./responsible.model";
 
-export type Role = "ADMINISTRATOR" | "RESPONSIBLE";
+export type Role = "ADMINISTRATOR" | "RESPONSIBLE" | "SCHOOL";
 
 export type AuthTokenResponse = {
   token: string;
