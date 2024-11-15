@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+ 
 import { AuthStore } from "@/store/auth.store";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -48,10 +48,9 @@ export function Router(): React.ReactElement {
       auth.clear();
       // navigate("/");
       navigate("/auth/sign-in/administrator");
-
       return;
     }
-  }, []);
+  }, [auth, pathnameWithQuery, navigate]);
 
   return (
     <React.Fragment>

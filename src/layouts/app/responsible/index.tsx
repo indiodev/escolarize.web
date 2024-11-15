@@ -1,7 +1,7 @@
 import { Sidebar } from "@/components/global/sidebar";
 import { Button } from "@/components/ui/button";
 import { useSidebar } from "@/components/ui/sidebar";
-import { ChevronsRight } from "lucide-react";
+import { ChevronsRight, LoaderCircle } from "lucide-react";
 import React from "react";
 import { Outlet } from "react-router-dom";
 
@@ -12,7 +12,11 @@ export function Responsible(): React.ReactElement {
     <React.Fragment>
       <Sidebar />
 
-      <React.Suspense>
+      <React.Suspense
+        fallback={
+          <LoaderCircle className="w-6 h-6 animate-spin" />
+        }
+      >
         <main className="p-2 flex-1 overflow-hidden h-screen space-y-1">
           {isMobile && (
             <section className="inline-flex w-full justify-start">
