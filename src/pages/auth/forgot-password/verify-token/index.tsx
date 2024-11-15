@@ -88,7 +88,7 @@ export function VerifyToken(): React.ReactElement {
                 // disabled={
                 // 	!form.formState.isValid || verifyCodeStatus === 'pending'
                 // }
-                className="w-[75%] h-12"
+                className="w-[75%] h-12 bg-primary/80"
               >
                 {/* {verifyCodeStatus === 'pending' && (
 									<LoaderCircle className="w-6 h-6 animate-spin" />
@@ -100,7 +100,7 @@ export function VerifyToken(): React.ReactElement {
               </Button>
               <Button
                 type="button"
-                className="w-[75%] h-12"
+                className="w-[75%] h-12 bg-primary/80"
                 onClick={() => navigate(-1)}
               >
                 Voltar

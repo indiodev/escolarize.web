@@ -79,7 +79,7 @@ export function SendEmail(): React.ReactElement {
             <Button
               // disabled={status === "pending"}
               type="button"
-              className="h-12 w-full"
+              className="h-12 w-full bg-primary/80"
               onClick={() => navigate("/auth/forgot-password/verify-token")} // trocar para o onSuccess
             >
               {/* {status === "pending" && (

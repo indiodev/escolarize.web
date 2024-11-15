@@ -12,11 +12,11 @@ export function Dashboard() {
     <main className="container max-w-full w-full">
       {/* <h2>Dashboard</h2> */}
       <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-        <Card>
+        <Card className="dark:bg-secondary">
           <CardHeader className="flex space-x-3 items-start xl:items-center flex-row">
             <User className="w-10 h-10" />
             <div className="space-y-1">
-              <CardTitle>Estudantes</CardTitle>
+              <CardTitle className="">Estudantes</CardTitle>
               <CardDescription>300 estudantes cadastrados.</CardDescription>
             </div>
           </CardHeader>
@@ -27,7 +27,7 @@ export function Dashboard() {
             </Button>
           </CardFooter> */}
         </Card>
-        <Card>
+        <Card className="dark:bg-secondary">
           <CardHeader className="flex space-x-3 items-start xl:items-center flex-row">
             <UsersRound className="w-10 h-10" />
             <div className="space-y-1">
@@ -42,7 +42,7 @@ export function Dashboard() {
             </Button>
           </CardFooter> */}
         </Card>
-        <Card>
+        <Card className="dark:bg-secondary">
           <CardHeader className="flex space-x-3 items-start xl:items-center flex-row">
             <GraduationCap className="w-10 h-10" />
             <div className="space-y-1">
@@ -57,7 +57,7 @@ export function Dashboard() {
             </Button>
           </CardFooter> */}
         </Card>
-        <Card>
+        <Card className="dark:bg-secondary">
           <CardHeader className="flex space-x-3 items-start xl:items-center flex-row">
             <Presentation className="w-10 h-10" />
             <div className="space-y-1">

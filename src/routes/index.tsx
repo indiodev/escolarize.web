@@ -1,4 +1,3 @@
- 
 import { AuthStore } from "@/store/auth.store";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -22,35 +21,33 @@ export function Router(): React.ReactElement {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const pathnameWithQuery = location.pathname.concat(location.search);
+  const IS_ADMINISTRATOR_ACCESS = auth.token && auth.access === "ADMINISTRATOR";
+  const IS_RESPONSIBLE_ACCESS = auth.token && auth.access === "RESPONSIBLE";
 
   React.useEffect(() => {
-    if (auth.token) {
-      if (pathnameWithQuery === "/") {
-        if (auth.access === "ADMINISTRATOR") {
-          navigate("/app/administrator/dashboard");
-          return;
-        }
-
-        if (auth.access === "RESPONSIBLE") {
-          navigate("/app/responsible/dashboard");
-          return;
-        }
-
-        return;
-      }
-
-      navigate(pathnameWithQuery);
+    if (IS_ADMINISTRATOR_ACCESS && location.pathname === "/") {
+      navigate("/app/administrator/dashboard");
       return;
     }
 
-    if (!auth.token && !pathnameWithQuery.includes("auth")) {
+    if (IS_RESPONSIBLE_ACCESS && location.pathname === "/") {
+      navigate("/app/responsible/dashboard");
+      return;
+    }
+
+    if (auth.token) {
+      navigate(location?.pathname.concat(location.search));
+      return;
+    }
+
+    if (!auth.token && !location.pathname.includes("auth")) {
       auth.clear();
       // navigate("/");
       navigate("/auth/sign-in/administrator");
       return;
     }
-  }, [auth, pathnameWithQuery, navigate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <React.Fragment>

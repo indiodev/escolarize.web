@@ -36,7 +36,7 @@ export function Sidebar() {
   return (
     <React.Fragment>
       <Root variant="floating" collapsible="icon">
-        <SidebarHeader>
+        <SidebarHeader className="dark:bg-secondary">
           <div
             className={cn(
               "inline-flex w-full justify-end",
@@ -47,7 +47,7 @@ export function Sidebar() {
               data-sidebar="trigger"
               variant="ghost"
               size="icon"
-              className="border  p-0 w-6 h-6"
+              className="border p-0 w-6 h-6 bg-primary text-primary-foreground dark:text-foreground"
               onClick={toggleSidebar}
             >
               {open && <ChevronsLeft className="w-5 h-5 " />}
@@ -62,17 +62,29 @@ export function Sidebar() {
                 loading="lazy"
                 className={cn("w-40 object-cover", !open && "w-9 h-9")}
               /> */}
-              <h1 className={cn("font-bold text-2xl", !open && "hidden")}>
+              <h1
+                className={cn(
+                  "font-bold text-2xl text-primary/80 dark:text-foreground",
+                  !open && "hidden"
+                )}
+              >
                 Escolarize
               </h1>
-              <h1 className={cn("font-bold text-2xl", open && "hidden")}>EZ</h1>
+              <h1
+                className={cn(
+                  "font-bold text-2xl text-primary/80 dark:text-foreground",
+                  open && "hidden"
+                )}
+              >
+                EZ
+              </h1>
             </div>
           </div>
         </SidebarHeader>
 
         <Separator className="w-full h-1" />
 
-        <SidebarContent>
+        <SidebarContent className="dark:bg-secondary">
           <SidebarGroup>
             <SidebarMenu>
               {MENU[ACCESS]?.SIDEBAR?.map((item) => {
@@ -82,7 +94,7 @@ export function Sidebar() {
                     <SidebarMenuItem>
                       <SidebarMenuButton
                         asChild
-                        className="py-6 [&[data-active=true]]:bg-foreground [&[data-active=true]>span]:text-white [&[data-active=true]>svg]:text-white"
+                        className="py-6 [&[data-active=true]]:bg-primary/80 [&[data-active=true]>span]:text-white [&[data-active=true]>svg]:text-white"
                         isActive={location.pathname === item.pathname}
                         onClick={() => {
                           if (isMobile) {
@@ -112,8 +124,14 @@ export function Sidebar() {
                         <SidebarMenuItem>
                           <SidebarMenuButton
                             asChild
-                            className="py-6 [&[data-active=true]]:bg-foreground [&[data-active=true]>span]:text-white [&[data-active=true]>svg]:text-white"
+                            className="py-6 [&[data-active=true]]:bg-primary/80 [&[data-active=true]>span]:text-white [&[data-active=true]>svg]:text-white"
                             isActive={location.pathname === item.pathname}
+                            onClick={() => {
+                              if (isMobile) {
+                                toggleSidebar();
+                                return;
+                              }
+                            }}
                           >
                             <NavLink to={item.pathname}>
                               <item.icon className="h-5 w-5 text-foreground" />
@@ -132,8 +150,13 @@ export function Sidebar() {
                   <SidebarMenuButton
                     className="py-6 [&[data-active=true]]:bg-foreground [&[data-active=true]>span]:text-white [&[data-active=true]>svg]:text-white"
                     onClick={() => {
+                      navigate(
+                        "/auth/sign-in/".concat(
+                          auth.access?.toLowerCase() || ""
+                        ),
+                        { replace: true }
+                      );
                       auth.clear();
-                      navigate("/", { replace: true });
                     }}
                   >
                     <LogOut className="h-5 w-5 text-foreground" />
@@ -145,54 +168,32 @@ export function Sidebar() {
           </SidebarGroup>
         </SidebarContent>
 
-        <SidebarFooter className="bg-foreground p-0 rounded-md">
+        <SidebarFooter className="bg-primary/80 p-0 rounded-md">
           <SidebarMenu>
             {!(isMobile || !open) && (
               <SidebarMenuItem>
                 <DropdownMenu modal={false}>
                   <DropdownMenuTrigger asChild>
                     <SidebarMenuButton className="h-14 rounded-md">
-                      {/* {user_status === "success" && (
-                        <React.Fragment>
-                          <Avatar className="w-10 h-10">
-                            <AvatarImage src="/profile.png" loading="lazy" />
-                            <AvatarFallback>CN</AvatarFallback>
-                          </Avatar>
-                          <span className="text-lg text-neutral-100 font-semibold">
-                            {user?.name?.split(" ")[0]}
-                          </span>
-                        </React.Fragment>
-                      )} */}
-
-                      {/* {!(user_status === "success") && ( */}
-                      <React.Fragment>
-                        <Avatar className="w-10 h-10">
-                          <AvatarImage src="/profile.png" loading="lazy" />
-                          <AvatarFallback>EZ</AvatarFallback>
-                        </Avatar>
-                        <span className="text-lg text-neutral-100 font-semibold">
-                          Escolarize
-                        </span>
-                      </React.Fragment>
-                      {/* )} */}
+                      <Avatar className="w-10 h-10">
+                        <AvatarImage src="/profile.png" loading="lazy" />
+                        <AvatarFallback>EZ</AvatarFallback>
+                      </Avatar>
+                      <span className="text-lg text-neutral-100 font-semibold">
+                        Escolarize
+                      </span>
                       <ChevronUp className="ml-auto text-white" />
                     </SidebarMenuButton>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent
                     side="top"
-                    className="w-[--radix-popper-anchor-width] bg-foreground"
+                    className="w-[--radix-popper-anchor-width] bg-foreground dark:bg-primary/80"
                   >
                     {MENU[ACCESS].DROPDOWN.map((item) => {
                       const KEY = `${ACCESS}-${item.pathname}` as const;
                       return (
                         <DropdownMenuItem asChild key={KEY}>
                           <NavLink
-                            onClick={() => {
-                              if (isMobile) {
-                                toggleSidebar();
-                                return;
-                              }
-                            }}
                             to={item.pathname}
                             className="space-x-1 group"
                           >
@@ -208,8 +209,13 @@ export function Sidebar() {
                       <SidebarMenuButton
                         className="py-5 group"
                         onClick={() => {
+                          navigate(
+                            "/auth/sign-in/".concat(
+                              auth.access?.toLowerCase() || ""
+                            ),
+                            { replace: true }
+                          );
                           auth.clear();
-                          navigate("/", { replace: true });
                         }}
                       >
                         <LogOut className="h-5 w-5 text-white group-hover:text-foreground" />

@@ -48,14 +48,14 @@ const ADMINISTRATOR: Context = {
       hasSeparator: false,
     },
     {
-      pathname: "/app/administrator/settings",
+      pathname: "/app/administrator/setting",
       label: "Configurações",
       icon: Settings,
       hasSeparator: false,
     },
   ],
 } as const;
-
+// exemplo
 export const MENU = {
   ADMINISTRATOR,
 } as const;

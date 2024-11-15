@@ -30,7 +30,11 @@ export function Administrator(): React.ReactElement {
   const navigate = useNavigate();
   const form = useForm<AdminSignIn>({
     resolver: zodResolver(AdminSignInSchema),
-    mode: "onSubmit",
+    defaultValues: {
+      email: "",
+      password: "",
+      remember_me: false,
+    },
   });
 
   const { status, mutateAsync: signIn } = useSignInMutation({
@@ -99,17 +103,10 @@ export function Administrator(): React.ReactElement {
                     </div>
                     <FormControl>
                       <Input
-                        onChange={(event) => {
-                          field.onChange(event.target.value);
-                        }}
+                        autoComplete="off"
                         placeholder="email@exemplo.com"
-                        {...(hasError && {
-                          className: "h-12 w-full border",
-                        })}
-                        {...(!hasError && {
-                          className: "h-12 w-full",
-                        })}
-                        // {...field}
+                        className={cn("h-12 w-full", hasError && "border")}
+                        {...field}
                       />
                     </FormControl>
                     <FormMessage className="text-right" />
@@ -132,12 +129,7 @@ export function Administrator(): React.ReactElement {
                         <div className="relative flex-1 w-full">
                           <Input
                             placeholder="•••••••••••"
-                            {...(hasError && {
-                              className: "h-12 w-full border",
-                            })}
-                            {...(!hasError && {
-                              className: "h-12 w-full",
-                            })}
+                            className={cn("h-12 w-full", hasError && "border")}
                             type={viewPassword ? "text" : "password"}
                             {...field}
                           />
@@ -203,12 +195,16 @@ export function Administrator(): React.ReactElement {
             <Button
               disabled={status === "pending"}
               type="submit"
-              className="h-12 w-full"
+              className="h-12 w-full bg-primary/80"
             >
               {status === "pending" && (
                 <LoaderCircle className="w-6 h-6 animate-spin" />
               )}
-              {!(status === "pending") && <span>Entrar</span>}
+              {!(status === "pending") && (
+                <span className="font-bold uppercase dark:text-foreground">
+                  Entrar
+                </span>
+              )}
             </Button>
           </form>
         </Form>
