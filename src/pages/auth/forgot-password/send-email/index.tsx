@@ -14,8 +14,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { useForm } from "react-hook-form";
-import { type SendEmail, SendEmailSchema } from "./schema";
 import { useNavigate } from "react-router-dom";
+import { type SendEmail, SendEmailSchema } from "./schema";
 
 export function SendEmail(): React.ReactElement {
   const navigate = useNavigate();
@@ -36,7 +36,8 @@ export function SendEmail(): React.ReactElement {
         <div className="space-y-1">
           <h2 className="text-lg text-left font-medium">Esqueceu a senha?</h2>
           <p className="text-left">
-            Não se preocupe! Digite o seu email abaixo, e nós enviaremos um código para ajudar você a recuperar o acesso à sua conta.
+            Não se preocupe! Digite o seu email abaixo, e nós enviaremos um
+            código para ajudar você a recuperar o acesso à sua conta.
           </p>
         </div>
 
@@ -79,7 +80,7 @@ export function SendEmail(): React.ReactElement {
               // disabled={status === "pending"}
               type="button"
               className="h-12 w-full"
-              onClick={() => navigate('/auth/forgot-password/verify-token')} // trocar para o onSuccess
+              onClick={() => navigate("/auth/forgot-password/verify-token")} // trocar para o onSuccess
             >
               {/* {status === "pending" && (
                 <LoaderCircle className="w-6 h-6 animate-spin" />
@@ -90,7 +91,6 @@ export function SendEmail(): React.ReactElement {
           </form>
         </Form>
       </div>
-</section>
-
+    </section>
   );
 }
