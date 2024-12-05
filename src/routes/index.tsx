@@ -16,6 +16,13 @@ const App = React.lazy(async function () {
   };
 });
 
+const Enrollment = React.lazy(async function () {
+  const module = await import("./enrollment");
+  return {
+    default: module.Router,
+  };
+});
+
 export function Router(): React.ReactElement {
   const auth = AuthStore();
   const navigate = useNavigate();
@@ -25,10 +32,10 @@ export function Router(): React.ReactElement {
   const IS_RESPONSIBLE_ACCESS = auth.token && auth.access === "RESPONSIBLE";
 
   React.useEffect(() => {
-    // if (IS_ADMINISTRATOR_ACCESS && location.pathname === "/") {
-    //   navigate("/app/administrator/dashboard");
-    //   return;
-    // }
+    if (IS_ADMINISTRATOR_ACCESS && location.pathname === "/") {
+      navigate("/app/administrator/dashboard");
+      return;
+    }
 
     if (IS_RESPONSIBLE_ACCESS && location.pathname === "/") {
       navigate("/app/responsible/dashboard");
@@ -43,7 +50,7 @@ export function Router(): React.ReactElement {
     if (!auth.token && !location.pathname.includes("auth")) {
       auth.clear();
       // navigate("/");
-      navigate("/auth/sign-in/administrator");
+      // navigate("/auth/sign-in/administrator");
       return;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -53,6 +60,7 @@ export function Router(): React.ReactElement {
     <React.Fragment>
       <Auth />
       <App />
+      <Enrollment />
     </React.Fragment>
   );
 }
