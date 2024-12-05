@@ -24,12 +24,14 @@ import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { ChevronsLeft, ChevronsRight, ChevronUp, LogOut } from "lucide-react";
 import React from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Role } from "@/models/auth.model";
 
 export function Sidebar() {
   const { toggleSidebar, open, isMobile } = useSidebar();
   const navigate = useNavigate();
   const location = useLocation();
   const auth = AuthStore();
+  // const ACCESS = auth.access! as keyof typeof MENU;
   const ACCESS = auth.access! as keyof typeof MENU;
   // const newTableButtonRef = React.useRef<HTMLButtonElement | null>(null);
 
