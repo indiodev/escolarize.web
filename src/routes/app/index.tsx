@@ -22,6 +22,13 @@ const ResponsibleRouter = React.lazy(async function () {
   };
 });
 
+const StudentsRouter = React.lazy(async function () {
+  const module = await import("./students");
+  return {
+    default: module.Router,
+  };
+});
+
 export function Router(): React.ReactElement {
   return (
     <Routes>
@@ -29,6 +36,7 @@ export function Router(): React.ReactElement {
         <Route path="administrator/*" element={<AdministratorRouter />} />
         <Route path="responsible/*" element={<ResponsibleRouter />} />
         <Route path="schools/*" element={<SchoolsRouter />} />
+        <Route path="students/*" element={<StudentsRouter />} />
       </Route>
     </Routes>
   );
