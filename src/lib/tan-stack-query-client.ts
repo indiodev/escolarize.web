@@ -1,6 +1,6 @@
 import { QueryClient } from "@tanstack/react-query";
 
-export const TANS_TACK_QUERY_CLIENT = new QueryClient({
+export const TAN_STACK_QUERY_CLIENT = new QueryClient({
   defaultOptions: {
     queries: {
       retry: false,

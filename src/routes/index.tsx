@@ -25,10 +25,10 @@ export function Router(): React.ReactElement {
   const IS_RESPONSIBLE_ACCESS = auth.token && auth.access === "RESPONSIBLE";
 
   React.useEffect(() => {
-    // if (IS_ADMINISTRATOR_ACCESS && location.pathname === "/") {
-    //   navigate("/app/administrator/dashboard");
-    //   return;
-    // }
+    if (IS_ADMINISTRATOR_ACCESS && location.pathname === "/") {
+      navigate("/app/administrator/dashboard");
+      return;
+    }
 
     if (IS_RESPONSIBLE_ACCESS && location.pathname === "/") {
       navigate("/app/responsible/dashboard");
