@@ -1,3 +1,4 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -71,11 +72,10 @@ export function School(): React.ReactElement {
           className="space-y-4 container flex w-full flex-col items-center justify-center px-4"
         >
           <div className="text-center space-y-1 ">
-            <img
-              src="/logo_jedais.png"
-              alt="logo_jedais"
-              className="mx-auto max-w-44 w-full md:w-3/4 lg:w-1/2 h-auto pr-4"
-            />
+            <Avatar className="mx-auto max-w-44 w-full md:w-3/4 lg:w-1/2 h-auto pr-4 rounded-none">
+              <AvatarImage src={String(school?.user!.avatar || "")} />
+              <AvatarFallback>{school?.user?.name?.charAt(0)}</AvatarFallback>
+            </Avatar>
             <h1 className="text-3xl font-bold">{school?.user?.name}</h1>
             <p className="text-xl">
               Matriculas abertas! Selecione um curso e faça já a sua inscrição.
@@ -121,10 +121,20 @@ export function School(): React.ReactElement {
                             <Badge variant="outline" className="text-sm">
                               {item?.days_of_week}
                             </Badge>
+                            <Badge variant="outline" className="text-sm">
+                              {item?.age_group}
+                            </Badge>
+                            <Badge variant="outline" className="text-sm">
+                              {new Intl.NumberFormat("pt-BR", {
+                                style: "currency",
+                                currency: "BRL",
+                              }).format(Number(item?.course?.price ?? 0))}
+                            </Badge>
                             {/* <Badge variant="outline" className="text-sm">
                               {item?.capacity} vagas
                             </Badge> */}
                           </div>
+                          {/*  */}
 
                           <div className="space-y-2 flex flex-col py-2">
                             <span className="text-sm">
