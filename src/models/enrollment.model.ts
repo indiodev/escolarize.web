@@ -19,6 +19,7 @@ export interface Class extends Base {
   days_of_week: string;
   audience: string;
   course: Partial<Course> | null;
+  age_group: string;
 }
 
 export interface School extends Base {

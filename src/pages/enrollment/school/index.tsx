@@ -26,6 +26,8 @@ export function School(): React.ReactElement {
     params.slug!
   );
 
+  console.log(school);
+
   const schema = z.object({
     class_id: z.coerce.number(),
   });
@@ -120,6 +122,9 @@ export function School(): React.ReactElement {
 
                             <Badge variant="outline" className="text-sm">
                               {item?.days_of_week}
+                            </Badge>
+                            <Badge variant="outline" className="text-sm">
+                              {item?.age_group}
                             </Badge>
                             {/* <Badge variant="outline" className="text-sm">
                               {item?.capacity} vagas
