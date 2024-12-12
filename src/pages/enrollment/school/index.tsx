@@ -121,6 +121,9 @@ export function School(): React.ReactElement {
                             <Badge variant="outline" className="text-sm">
                               {item?.days_of_week}
                             </Badge>
+                            <Badge variant="outline" className="text-sm">
+                              {item?.age_group}
+                            </Badge>
                             {/* <Badge variant="outline" className="text-sm">
                               {item?.capacity} vagas
                             </Badge> */}
