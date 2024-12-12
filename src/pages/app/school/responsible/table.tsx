@@ -14,10 +14,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Download, Ellipsis, Send } from "lucide-react";
+import { formatCpf, formatPhone } from "@/lib/utils";
+import { Responsible } from "@/models/responsible.model";
+import { Ellipsis, EyeIcon } from "lucide-react";
 interface Props {
   labels: string[];
-  data: { course: string; date: string; status: string; id: number }[];
+  data: Responsible[];
 }
 export function Table({ data, labels }: Props): React.ReactElement {
   return (
@@ -34,10 +36,11 @@ export function Table({ data, labels }: Props): React.ReactElement {
       <TableBody>
         {data.map((row) => (
           <TableRow key={row.id}>
-            <TableCell>{row.course}</TableCell>
-            <TableCell>{row.date}</TableCell>
-            <TableCell>R$ 150,00</TableCell>
-            <TableCell>{row.status}</TableCell>
+            <TableCell>{row?.user?.name?.toUpperCase()}</TableCell>
+            <TableCell>{row?.user?.email}</TableCell>
+            <TableCell>{formatCpf(row?.cpf)}</TableCell>
+            <TableCell>{formatPhone(row?.phone)}</TableCell>
+
             <TableCell>
               <DropdownMenu dir="rtl">
                 <DropdownMenuTrigger asChild>
@@ -48,12 +51,8 @@ export function Table({ data, labels }: Props): React.ReactElement {
                 <DropdownMenuContent className="w-48">
                   <DropdownMenuGroup>
                     <DropdownMenuItem className="inline-flex justify-between items-center w-full">
-                      <Send className="h-4 w-4" />
-                      <span>Enviar comprovante</span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="inline-flex justify-between items-center w-full">
-                      <Download className="ml-1 h-4 w-4" />
-                      <span>Baixar recibo</span>
+                      <EyeIcon className="ml-1 h-4 w-4" />
+                      <span>Visualizar</span>
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
                 </DropdownMenuContent>

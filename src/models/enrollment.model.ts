@@ -6,6 +6,7 @@ export interface Course extends Base {
   description: string;
   price: number;
   school_id: number;
+  tags: string[];
 }
 
 export interface Class extends Base {
@@ -16,8 +17,6 @@ export interface Class extends Base {
   number_of_student_accepted: number;
   number_of_student_on_reserve: number;
   school_id: number;
-  days_of_week: string;
-  audience: string;
   course: Partial<Course> | null;
 }
 

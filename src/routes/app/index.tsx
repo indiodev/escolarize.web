@@ -8,8 +8,8 @@ const AdministratorRouter = React.lazy(async function () {
   };
 });
 
-const SchoolsRouter = React.lazy(async function () {
-  const module = await import("./schools");
+const SchoolRouter = React.lazy(async function () {
+  const module = await import("./school");
   return {
     default: module.Router,
   };
@@ -22,8 +22,8 @@ const ResponsibleRouter = React.lazy(async function () {
   };
 });
 
-const StudentsRouter = React.lazy(async function () {
-  const module = await import("./students");
+const StudentRouter = React.lazy(async function () {
+  const module = await import("./student");
   return {
     default: module.Router,
   };
@@ -35,8 +35,8 @@ export function Router(): React.ReactElement {
       <Route path="app/*">
         <Route path="administrator/*" element={<AdministratorRouter />} />
         <Route path="responsible/*" element={<ResponsibleRouter />} />
-        <Route path="schools/*" element={<SchoolsRouter />} />
-        <Route path="students/*" element={<StudentsRouter />} />
+        <Route path="school/*" element={<SchoolRouter />} />
+        <Route path="student/*" element={<StudentRouter />} />
       </Route>
     </Routes>
   );
