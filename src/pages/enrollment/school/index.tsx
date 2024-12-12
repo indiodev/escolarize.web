@@ -68,9 +68,14 @@ export function School(): React.ReactElement {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-4 container flex w-full flex-col items-center justify-center"
+          className="space-y-4 container flex w-full flex-col items-center justify-center px-4"
         >
-          <div className="text-center space-y-1">
+          <div className="text-center space-y-1 ">
+            <img
+              src="/logo_jedais.png"
+              alt="logo_jedais"
+              className="mx-auto max-w-44 w-full md:w-3/4 lg:w-1/2 h-auto pr-4"
+            />
             <h1 className="text-3xl font-bold">{school?.user?.name}</h1>
             <p className="text-xl">
               Matriculas abertas! Selecione um curso e faça já a sua inscrição.

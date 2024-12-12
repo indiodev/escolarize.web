@@ -50,7 +50,6 @@ export function Student() {
   });
 
   const onSubmit = (data: z.infer<typeof Schema>) => {
-    // console.log(data);
     navigate(
       location.pathname?.replace("/student", "/continue-with-responsible"),
       {
