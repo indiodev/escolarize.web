@@ -86,7 +86,7 @@ export function School(): React.ReactElement {
             control={form.control}
             name="class_id"
             render={({ field }) => (
-              <FormItem className="space-y-3">
+              <FormItem className="space-y-3 w-full">
                 <FormLabel className="text-3xl sr-only">
                   Selecione um curso
                 </FormLabel>
@@ -94,43 +94,43 @@ export function School(): React.ReactElement {
                   <RadioGroup
                     onValueChange={field.onChange}
                     defaultValue={field.value?.toString()}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full"
                   >
                     {school?.classes?.map((item) => (
-                      <FormItem key={item.id}>
+                      <FormItem key={item.id} className="w-full">
                         <FormControl>
                           <RadioGroupItem
                             value={item.id?.toString()}
                             className="peer sr-only"
                           />
                         </FormControl>
-                        <FormLabel className="flex flex-col rounded-xl border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary w-full h-full space-y-2 select-none group">
-                          <h2 className="font-semibold text-2xl">
+                        <FormLabel className="flex flex-col rounded-xl border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary w-full h-full space-y-2 select-none group cursor-pointer">
+                          <h2 className="font-semibold text-xl sm:text-2xl truncate">
                             {item?.course?.title}
                           </h2>
 
-                          <div className="inline-flex space-x-3">
-                            <Badge variant="outline" className="text-md">
+                          <div className="flex flex-wrap gap-2 items-center">
+                            <Badge variant="outline" className="text-sm">
                               {item?.code}
                             </Badge>
-                            <Badge variant="outline" className="text-md">
+                            <Badge variant="outline" className="text-sm">
                               {item?.start_hour?.split(":")[0]} -{" "}
                               {item?.final_hour?.split(":")[0]} h
                             </Badge>
 
-                            <Badge variant="outline" className="text-md">
+                            <Badge variant="outline" className="text-sm">
                               {item?.days_of_week}
                             </Badge>
-                            <Badge variant="outline" className="text-md">
+                            {/* <Badge variant="outline" className="text-sm">
                               {item?.capacity} vagas
-                            </Badge>
+                            </Badge> */}
                           </div>
 
-                          <div className="space-y-2 flex flex-col py-4">
-                            <span className="text-md">
+                          <div className="space-y-2 flex flex-col py-2">
+                            <span className="text-sm">
                               <strong>Público: </strong> {item?.audience}
                             </span>
-                            <span className="text-md ">
+                            <span className="text-sm">
                               <strong>
                                 {item?.capacity -
                                   item?.number_of_student_accepted}{" "}
@@ -140,24 +140,29 @@ export function School(): React.ReactElement {
                           </div>
 
                           <div
-                            className="space-y-2"
+                            className="text-sm text-muted-foreground"
                             dangerouslySetInnerHTML={{
                               __html: item?.course?.description || "",
                             }}
                           />
-                          <div className="flex justify-end">
+                          <div className="flex justify-end mt-2">
                             <Button
                               type="submit"
-                              // variant="secondary"
                               disabled={!form.watch("class_id")}
                               className={cn(
-                                "text-lg p-4 right-0",
+                                "text-base p-3 sm:text-lg sm:p-4",
                                 form.watch("class_id")?.toString() !==
                                   item.id?.toString() &&
                                   "bg-transparent text-transparent shadow-none hover:bg-transparent select-none pointer-events-none"
                               )}
                             >
-                              Prosseguir
+                              {item?.capacity -
+                                item?.number_of_student_accepted <=
+                                0 && "Entrar pra lista de espera"}
+
+                              {item?.capacity -
+                                item?.number_of_student_accepted >
+                                0 && "Prosseguir"}
                             </Button>
                           </div>
                         </FormLabel>
