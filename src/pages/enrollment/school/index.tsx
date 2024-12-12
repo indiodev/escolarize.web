@@ -26,8 +26,6 @@ export function School(): React.ReactElement {
     params.slug!
   );
 
-  console.log(school);
-
   const schema = z.object({
     class_id: z.coerce.number(),
   });
