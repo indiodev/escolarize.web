@@ -33,8 +33,13 @@ export function Address(): React.ReactElement {
         //   replace: true,
         // });
 
-        navigate(location.pathname?.replace("/address", ""), {
-          replace: true,
+        navigate(location.pathname?.replace("/address", "/success"), {
+          state: {
+            ...location.state,
+            address: {
+              ...form.getValues("address"),
+            },
+          },
         });
       },
     });
@@ -56,7 +61,7 @@ export function Address(): React.ReactElement {
 
     let student: Record<string, unknown> = {
       ...location.state?.student,
-      student_birth_date,
+      birth_date: student_birth_date,
     };
 
     if (location.state?.responsible) {
@@ -76,6 +81,13 @@ export function Address(): React.ReactElement {
         birth_date: student_birth_date,
       };
     }
+
+    console.log({
+      ...location.state,
+      ...data,
+      student,
+      responsible,
+    });
 
     create_enrollment({
       ...location.state,

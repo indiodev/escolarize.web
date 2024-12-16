@@ -37,6 +37,13 @@ const AddressPage = React.lazy(async function () {
   };
 });
 
+const SuccessPage = React.lazy(async function () {
+  const module = await import("@/pages/enrollment/success");
+  return {
+    default: module.Success,
+  };
+});
+
 const ProofOfPaymentPage = React.lazy(async function () {
   const module = await import("@/pages/enrollment/proof_of_payment");
   return {
@@ -51,6 +58,7 @@ export function Router(): React.ReactElement {
       <Route path=":slug/student" element={<StudentPage />} />
       <Route path=":slug/responsible" element={<ResponsiblePage />} />
       <Route path=":slug/address" element={<AddressPage />} />
+      <Route path=":slug/success" element={<SuccessPage />} />
       <Route path=":slug/proof-of-payment" element={<ProofOfPaymentPage />} />
     </Routes>
   );

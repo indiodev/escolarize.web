@@ -40,11 +40,13 @@ export function School(): React.ReactElement {
   });
 
   function onSubmit(data: _Form) {
+    const _class = response?.classes?.find((c) => c.id === data.class_id);
     navigate(location.pathname?.concat("/student"), {
       state: {
         ...location.state,
         ...data,
         school_id: response?.id,
+        _class,
       },
     });
   }
