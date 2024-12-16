@@ -7,8 +7,14 @@ import React from "react";
 import { Table } from "./table";
 
 export function Student(): React.ReactElement {
+  const [query] = React.useState<Record<string, unknown>>({
+    page: 1,
+    per_page: 50,
+  });
   const { data: response, status: status_response } =
-    useSchoolStudentPaginateQuery({});
+    useSchoolStudentPaginateQuery({
+      ...query,
+    });
 
   if (status_response === "pending") {
     return (
