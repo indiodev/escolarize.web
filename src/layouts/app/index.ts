@@ -1,11 +1,11 @@
 import { Administrator } from "./administrator";
 import { Responsible } from "./responsible";
-import { Schools } from "./schools";
-import { Students } from "./students";
+import { School } from "./school";
+import { Student } from "./student";
 
 export const App = {
-  Schools,
+  School,
   Administrator,
   Responsible,
-  Students,
+  Student,
 };

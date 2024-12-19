@@ -10,7 +10,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { useEnrollmentCreateMutation } from "@/mutation/enrollment/create.mutation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { LoaderCircleIcon } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -20,6 +22,28 @@ export function Address(): React.ReactElement {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const { mutateAsync: create_enrollment, status: create_enrollment_status } =
+    useEnrollmentCreateMutation({
+      onError(error) {
+        console.error(error);
+      },
+      onSuccess() {
+        //TODO: deixar dinamico pelo slug da escola /:slug
+        // navigate(location.pathname?.replace("/address", "/proof-of-payment"), {
+        //   replace: true,
+        // });
+
+        navigate(location.pathname?.replace("/address", "/success"), {
+          state: {
+            ...location.state,
+            address: {
+              ...form.getValues("address"),
+            },
+          },
+        });
+      },
+    });
+
   const form = useForm<AddressType>({
     resolver: zodResolver(Schema),
     defaultValues: {
@@ -28,49 +52,63 @@ export function Address(): React.ReactElement {
   });
 
   const onSubmit = form.handleSubmit((data) => {
-    navigate(location.pathname?.replace("/address", "/finish"), {
-      state: {
-        ...location.state,
-        ...data,
-      },
+    const student_birth_date = location.state?.student?.birth_date
+      ?.split("/")
+      .reverse()
+      .join("-");
+
+    let responsible: Record<string, unknown> | null = null;
+
+    let student: Record<string, unknown> = {
+      ...location.state?.student,
+      birth_date: student_birth_date,
+    };
+
+    if (location.state?.responsible) {
+      const responsible_birth_date = location.state?.responsible?.birth_date
+        ?.split("/")
+        .reverse()
+        .join("-");
+
+      responsible = {
+        ...location.state?.responsible,
+        birth_date: responsible_birth_date,
+      };
+      student = {
+        ...location.state?.student,
+        email: location.state?.responsible?.email,
+        phone: location.state?.responsible?.phone,
+        birth_date: student_birth_date,
+      };
+    }
+
+    console.log({
+      ...location.state,
+      ...data,
+      student,
+      responsible,
+    });
+
+    create_enrollment({
+      ...location.state,
+      ...data,
+      student,
+      responsible,
     });
   });
 
   return (
-    <section className="w-full h-full p-8 flex flex-col justify-center items-center ">
+    <section className="w-full h-full py-20 px-10 flex flex-col justify-center items-center ">
       <Form {...form}>
         <form
           onSubmit={onSubmit}
           className="space-y-4 container flex w-full max-w-2xl h-full flex-col "
         >
-          {location.state?.continue_with_responsible === "NO" && (
-            <FormField
-              control={form.control}
-              name="address.email"
-              render={({ field }) => {
-                const hasError =
-                  !!form.formState.errors?.address?.email?.message;
+          <div className="text-left flex flex-col gap-1">
+            <h1 className="text-3xl font-bold">Endereço</h1>
+            <p className="text-xl">Quase lá! Preencha os dados de Endereço</p>
+          </div>
 
-                return (
-                  <FormItem className="w-full">
-                    <FormLabel>E-mail do aluno</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="joe.doe@gmail.com"
-                        className={cn(
-                          "w-full",
-                          hasError && "border bg-red-100 border-red-500"
-                        )}
-                        {...field}
-                      />
-                    </FormControl>
-
-                    <FormMessage />
-                  </FormItem>
-                );
-              }}
-            />
-          )}
           <FormField
             control={form.control}
             name="address.cep"
@@ -93,7 +131,7 @@ export function Address(): React.ReactElement {
                       placeholder="000.000.000-00"
                       className={cn(
                         "w-full",
-                        hasError && "border bg-red-100 border-red-500"
+                        hasError && "border border-red-500"
                       )}
                       // {...field}
                     />
@@ -120,7 +158,7 @@ export function Address(): React.ReactElement {
                       placeholder="Benjamin Constant"
                       className={cn(
                         "w-full",
-                        hasError && "border bg-red-100 border-red-500"
+                        hasError && "border border-red-500"
                       )}
                       {...field}
                     />
@@ -147,7 +185,7 @@ export function Address(): React.ReactElement {
                       placeholder="AM"
                       className={cn(
                         "w-full",
-                        hasError && "border bg-red-100 border-red-500"
+                        hasError && "border border-red-500"
                       )}
                       {...field}
                     />
@@ -174,7 +212,7 @@ export function Address(): React.ReactElement {
                       placeholder="Centro"
                       className={cn(
                         "w-full",
-                        hasError && "border bg-red-100 border-red-500"
+                        hasError && "border placeholder:border-red-500"
                       )}
                       {...field}
                     />
@@ -201,7 +239,7 @@ export function Address(): React.ReactElement {
                       placeholder="1234"
                       className={cn(
                         "w-full",
-                        hasError && "border bg-red-100 border-red-500"
+                        hasError && "border  border-red-500"
                       )}
                       {...field}
                     />
@@ -228,7 +266,7 @@ export function Address(): React.ReactElement {
                       placeholder="Rua nossa senhora do Rosário"
                       className={cn(
                         "w-full",
-                        hasError && "border bg-red-100 border-red-500"
+                        hasError && "border  border-red-500"
                       )}
                       {...field}
                     />
@@ -255,7 +293,7 @@ export function Address(): React.ReactElement {
                       placeholder="Casa, apto, etc"
                       className={cn(
                         "w-full",
-                        hasError && "border bg-red-100 border-red-500"
+                        hasError && "border  border-red-500"
                       )}
                       {...field}
                     />
@@ -272,7 +310,12 @@ export function Address(): React.ReactElement {
             className="h-12 uppercase font-semibold text-md"
             disabled={!form.formState.isValid}
           >
-            Prosseguir
+            {create_enrollment_status === "pending" && (
+              <LoaderCircleIcon className="w-6 h-6 animate-spin" />
+            )}
+            {!(create_enrollment_status === "pending") && (
+              <span>Reservar matricula</span>
+            )}
           </Button>
         </form>
       </Form>

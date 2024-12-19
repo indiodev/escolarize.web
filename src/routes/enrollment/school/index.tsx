@@ -23,13 +23,6 @@ const StudentPage = React.lazy(async function () {
   };
 });
 
-const ContinueWithResponsiblePage = React.lazy(async function () {
-  const module = await import("@/pages/enrollment/continue-with-responsible");
-  return {
-    default: module.ContinueWithResponsible,
-  };
-});
-
 const ResponsiblePage = React.lazy(async function () {
   const module = await import("@/pages/enrollment/responsible");
   return {
@@ -44,10 +37,17 @@ const AddressPage = React.lazy(async function () {
   };
 });
 
-const FinishPage = React.lazy(async function () {
-  const module = await import("@/pages/enrollment/finish");
+const SuccessPage = React.lazy(async function () {
+  const module = await import("@/pages/enrollment/success");
   return {
-    default: module.Finish,
+    default: module.Success,
+  };
+});
+
+const ProofOfPaymentPage = React.lazy(async function () {
+  const module = await import("@/pages/enrollment/proof_of_payment");
+  return {
+    default: module.ProofOfPayment,
   };
 });
 
@@ -56,13 +56,10 @@ export function Router(): React.ReactElement {
     <Routes>
       <Route path=":slug" element={<SchoolPage />} />
       <Route path=":slug/student" element={<StudentPage />} />
-      <Route
-        path=":slug/continue-with-responsible"
-        element={<ContinueWithResponsiblePage />}
-      />
       <Route path=":slug/responsible" element={<ResponsiblePage />} />
       <Route path=":slug/address" element={<AddressPage />} />
-      <Route path=":slug/finish" element={<FinishPage />} />
+      <Route path=":slug/success" element={<SuccessPage />} />
+      <Route path=":slug/proof-of-payment" element={<ProofOfPaymentPage />} />
     </Routes>
   );
 }

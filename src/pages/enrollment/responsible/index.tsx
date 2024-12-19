@@ -66,13 +66,13 @@ export function Responsible() {
   };
 
   return (
-    <section className="w-full h-full p-8 flex flex-col justify-center items-center ">
+    <section className="w-full h-full py-20 px-10 flex flex-col justify-center items-center ">
       <Form {...form}>
         <form
-          className="space-y-4 container flex w-full max-w-2xl h-full flex-col "
+          className="gap-4 container flex w-full max-w-2xl h-full flex-col "
           onSubmit={form.handleSubmit(onSubmit)}
         >
-          <div className="text-left space-y-1">
+          <div className="text-left flex flex-col gap-1">
             <h1 className="text-3xl font-bold">Dados do responsável</h1>
             <p className="text-xl">Preencha os dados do responsável</p>
           </div>
@@ -97,7 +97,7 @@ export function Responsible() {
                       placeholder="Joe Doe"
                       className={cn(
                         "w-full",
-                        hasError && "border bg-red-100 border-red-500"
+                        hasError && "border  border-red-500"
                       )}
                       {...field}
                     />
@@ -124,7 +124,7 @@ export function Responsible() {
                       placeholder="joe.doe@example.com"
                       className={cn(
                         "w-full",
-                        hasError && "border bg-red-100 border-red-500"
+                        hasError && "border  border-red-500"
                       )}
                       {...field}
                     />
@@ -158,7 +158,7 @@ export function Responsible() {
                       placeholder="000.000.000-00"
                       className={cn(
                         "w-full",
-                        hasError && "border bg-red-100 border-red-500"
+                        hasError && "border  border-red-500"
                       )}
                       // {...field}
                     />
@@ -192,7 +192,7 @@ export function Responsible() {
                       placeholder="(99) 99999-9999"
                       className={cn(
                         "w-full",
-                        hasError && "border bg-red-100 border-red-500"
+                        hasError && "border  border-red-500"
                       )}
                       // {...field}
                     />
@@ -226,7 +226,7 @@ export function Responsible() {
                       placeholder="99/99/9999"
                       className={cn(
                         "w-full",
-                        hasError && "border bg-red-100 border-red-500"
+                        hasError && "border  border-red-500"
                       )}
                       // {...field}
                     />
