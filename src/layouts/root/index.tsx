@@ -2,22 +2,14 @@ import { LoaderCircle } from "lucide-react";
 import React from "react";
 
 import { Outlet } from "react-router-dom";
-
-function Fallback(): React.ReactElement {
-  return (
-    <main className="container gap-4 max-w-full w-full h-full flex flex-col">
-      <div className="flex-1 flex justify-center items-center">
-        <LoaderCircle className="w-12 h-12 animate-spin" />
-      </div>
-    </main>
-  );
-}
 export function Root(): React.ReactElement {
   return (
-    <main className="flex-1 overflow-hidden h-auto">
-      <React.Suspense fallback={<Fallback />}>
+    <section className="w-full h-full">
+      <React.Suspense
+        fallback={<LoaderCircle className="w-6 h-6 animate-spin" />}
+      >
         <Outlet />
       </React.Suspense>
-    </main>
+    </section>
   );
 }

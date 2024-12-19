@@ -56,29 +56,24 @@ const ADMINISTRATOR: Context = {
   ],
 } as const;
 
+
 const SCHOOL: Context = {
   SIDEBAR: [
     {
-      label: "Dashboard",
-      pathname: "/app/school/dashboard",
+      label: "Inicio",
+      pathname: "/app/schools/dashboard",
       icon: Home,
       hasSeparator: true,
     },
-    // {
-    //   label: "Mensalidades",
-    //   pathname: "/app/school/payment",
-    //   icon: HandCoins,
-    //   hasSeparator: false,
-    // },
     {
-      label: "Estudantes",
-      pathname: "/app/school/student",
-      icon: User,
+      label: "Mensalidades",
+      pathname: "/app/schools/payment",
+      icon: HandCoins,
       hasSeparator: false,
     },
     {
       label: "Responsáveis",
-      pathname: "/app/school/responsible",
+      pathname: "/app/schools/responsible",
       icon: Users,
       hasSeparator: false,
     },
@@ -86,12 +81,12 @@ const SCHOOL: Context = {
   DROPDOWN: [
     {
       label: "Perfil",
-      pathname: "/app/school/profile",
+      pathname: "/app/schools/profile",
       icon: User,
       hasSeparator: false,
     },
     {
-      pathname: "/app/school/setting",
+      pathname: "/app/schools/setting",
       label: "Configurações",
       icon: Settings,
       hasSeparator: false,
@@ -103,7 +98,7 @@ const STUDENTS: Context = {
   SIDEBAR: [
     {
       label: "Inicio",
-      pathname: "/app/student/dashboard",
+      pathname: "/app/students/dashboard",
       icon: Home,
       hasSeparator: true,
     },
@@ -111,12 +106,12 @@ const STUDENTS: Context = {
   DROPDOWN: [
     {
       label: "Perfil",
-      pathname: "/app/student/profile",
+      pathname: "/app/students/profile",
       icon: User,
       hasSeparator: false,
     },
     {
-      pathname: "/app/student/setting",
+      pathname: "/app/students/setting",
       label: "Configurações",
       icon: Settings,
       hasSeparator: false,

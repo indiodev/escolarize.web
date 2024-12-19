@@ -5,14 +5,16 @@ import { ChevronsRight, LoaderCircle } from "lucide-react";
 import React from "react";
 import { Outlet } from "react-router-dom";
 
-export function Student(): React.ReactElement {
+export function Students(): React.ReactElement {
   const { toggleSidebar, isMobile } = useSidebar();
 
   return (
     <React.Fragment>
       <Sidebar />
       <React.Suspense
-        fallback={<LoaderCircle className="w-6 h-6 animate-spin" />}
+        fallback={
+          <LoaderCircle className="w-6 h-6 animate-spin" />
+        }
       >
         <main className="p-2 flex-1 overflow-hidden h-screen space-y-1">
           {isMobile && (
