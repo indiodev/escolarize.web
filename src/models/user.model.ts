@@ -8,7 +8,7 @@ export interface User extends Base {
   password: string;
   role: Role;
   accepted_terms: boolean;
-  responsible: Partial<Responsible>;
+  responsible: Partial<Responsible> | null;
 
   birth_date: string | null;
   avatar: string | null;

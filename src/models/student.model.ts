@@ -5,5 +5,5 @@ export interface Student extends Base {
   phone: string;
   cpf: string;
   user_id: number;
-  user: User | undefined;
+  user: Partial<User> | null;
 }
