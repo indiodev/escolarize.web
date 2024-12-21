@@ -1,4 +1,7 @@
 import {
+  Book,
+  BookMarked,
+  GraduationCapIcon,
   HandCoins,
   Home,
   LucideIcon,
@@ -80,6 +83,12 @@ const SCHOOL: Context = {
       label: "Responsáveis",
       pathname: "/app/school/responsible",
       icon: Users,
+      hasSeparator: false,
+    },
+    {
+      label: "Cursos",
+      pathname: "/app/school/course",
+      icon: BookMarked,
       hasSeparator: false,
     },
   ],

@@ -1,4 +1,5 @@
 import { API } from "@/lib/api";
+import { Course } from "@/models/course.model";
 import { MetaQuery, MetaResponse } from "@/models/query.model";
 import { Responsible } from "@/models/responsible.model";
 import { SchoolDashboardMetric } from "@/models/school.model";
@@ -27,4 +28,23 @@ export default class SchoolService {
     });
     return data;
   }
+
+  async coursePaginate(query: MetaQuery): Promise<MetaResponse<Course[]>> {
+    return {
+      data: [], // Sem dados
+      meta: {
+        total: 0,
+        perPage: query.per_page || 10,
+        currentPage: query.page || 1, 
+        firstPage: 1,
+        lastPage: 1,
+        firstPageUrl: "",
+        lastPageUrl: "",
+        nextPageUrl: null,
+        previousPageUrl: null,
+      },
+    };
+  }
+  
+  
 }

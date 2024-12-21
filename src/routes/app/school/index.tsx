@@ -44,6 +44,20 @@ const SchoolSettingPage = React.lazy(async function () {
   };
 });
 
+const SchoolCoursePage = React.lazy(async function () {
+  const module = await import("@/pages/app/school/course");
+  return {
+    default: module.Course,
+  };
+});
+
+function NotFound() {
+  return <h1>404 - Página não encontrada!</h1>;
+}
+
+// Adicione no Routes:
+
+
 export function Router(): React.ReactElement {
   return (
     <Routes>
@@ -54,6 +68,8 @@ export function Router(): React.ReactElement {
         <Route path="/payment" element={<SchoolPaymentPage />} />
         <Route path="/profile" element={<SchoolProfilePage />} />
         <Route path="/setting" element={<SchoolSettingPage />} />
+        <Route path="/course" element={<SchoolCoursePage />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );

@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/card";
 import { useSchoolDashboardQuery } from "@/query/school/dashboard.query";
 import {
+  BookMarked,
   GraduationCap,
   LoaderCircle,
   Presentation,
@@ -86,7 +87,7 @@ export function Dashboard() {
         </Card>
         <Card className="dark:bg-secondary">
           <CardHeader className="flex gap-2 items-start xl:items-center flex-row">
-            <Presentation className="w-10 h-10" />
+            <BookMarked className="w-10 h-10" />
             <div className="gap-1 flex flex-col">
               <CardTitle>Cursos</CardTitle>
               <CardDescription>
